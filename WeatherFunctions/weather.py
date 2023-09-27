@@ -29,6 +29,9 @@ locations = {
     "Felixstowe": 2649579
 }
 
+def get_loc_code(loc_name):
+    return str(locations.get(loc_name))
+
 
 def get_weather(loc):
     loc_code = locations.get(loc)
@@ -63,7 +66,7 @@ def process_weather(location):
 
     #selenium setup
     driver = webdriver.Chrome()
-    driver.get('https://www.bbc.co.uk/weather/' + str(locations.get(location)))
+    driver.get('https://www.bbc.co.uk/weather/' + get_loc_code(location))
     assert location in driver.title
 
     #loop through each visible day
@@ -85,4 +88,8 @@ def upload_to_SQL_server(data_extract):
         )
     cnxn.commit()
 
-upload_to_SQL_server(process_weather("Sheffield"))
+
+def upload_all_locations():
+    for loc in locations:
+        upload_to_SQL_server(process_weather(loc))
+# upload_to_SQL_server(process_weather("Sheffield"))

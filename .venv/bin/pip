@@ -1,4 +1,4 @@
-#!/Users/christopher/weatherApp/.venv/bin/python3.10
+#!/Users/christopher/repos/weather/.venv/bin/python3.10
 # -*- coding: utf-8 -*-
 import re
 import sys
